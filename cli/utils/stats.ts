@@ -1,4 +1,4 @@
-import { cyanBright, green, magenta } from 'colorette';
+import { cyanBright, green, magenta, yellow } from 'colorette';
 
 import { IndexEntryMap } from "../types";
 
@@ -20,12 +20,13 @@ const showStats = (indexObj: IndexEntryMap) => {
         totalSize += size;
 
         statMsg += `\nAlgorithm : ${cyanBright(entry)}\n`;
+        statMsg += `Topic : ${yellow(entryObj.topic)}\n`;
         statMsg += `File count : ${green(entryObj.files.length.toString())}\n`;
-        statMsg += `Size : ${green(size.toPrecision(2) + 'kb')}\n`;
+        statMsg += `Size : ${green(size.toPrecision(3) + 'kb')}\n`;
         statMsg += `Languages : ${magenta(entryObj.files.map(e => e.lang).join())}\n`;
     }
 
-    console.log(`Total files : ${green(totalFiles.toString())}, Total size : ${green(totalSize + 'kb')}`);
+    console.log(`Total files : ${green(totalFiles.toString())}, Total size : ${green(totalSize.toPrecision(3) + 'kb')}`);
     console.log(statMsg);
 }
 

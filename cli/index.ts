@@ -1,7 +1,7 @@
-import path from 'path';
+import { join } from 'path';
 import { program } from 'commander';
 
-import { indexer, showStats, walker } from './utils'
+import { indexer, showStats } from './utils'
 
 
 // Command setup
@@ -11,9 +11,8 @@ program
     .option('-s, --stats', 'Show index stats')
     .description('Starts indexing algorithms directory')
     .action(opts => {
-        const algorithmsDir = path.join(__dirname, '..', 'algorithms');
-        const filesList = walker(algorithmsDir);
-        const indexObj = indexer(filesList);
+        const algorithmsDir = join(__dirname, '..', 'algorithms', 'strings');
+        const indexObj = indexer(algorithmsDir);
 
         console.log('Indexing complete');
 

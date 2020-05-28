@@ -1,34 +1,21 @@
 import { statSync, writeFileSync } from 'fs';
-import { join, parse } from 'path';
+import { join, parse, sep } from 'path';
 
+import { walker } from './walker';
 import { extensionMap } from '../constants';
+import { convertPascalToSnakeCase, convertSnakeToCapitalized } from './strings';
 import { IndexEntryMap, IndexFileEntry } from '../types';
 
 
 /**
- * Will convert pascal case i.e FileName to snake case i.e. file_name
- * @param fileName 
- */
-const convertPascalToSnakeCase = (fileName: string) => {
-    let newFileName = '';
-    newFileName += fileName[0].toLowerCase();
-
-    for (let i = 1; i < fileName.length; i++) {
-        newFileName += fileName[i] === fileName[i].toLowerCase()
-            ? fileName[i]
-            : "_" + fileName[i].toLowerCase();
-    }
-
-    return newFileName;
-}
-
-/**
  * Simple function that will map file name to relevant language files
  * Can be used to get stats for each algorithm like language, file size
- * @param filesList Files that needed to be indexed
+ * @param dirPath Path of directory to be indexed
  */
-const indexer = (filesList: string[]) => {
+const indexer = (dirPath: string) => {
     const obj: IndexEntryMap = {};
+
+    const filesList = walker(dirPath);
 
     filesList
         .filter(f => !f.endsWith(".md")) // only index language files
@@ -36,6 +23,10 @@ const indexer = (filesList: string[]) => {
             const { ext, name, dir, base } = parse(file);
             const { size } = statSync(file);
             const newName = convertPascalToSnakeCase(name);
+
+            const splitPath = dir.split(sep);
+            let topic = splitPath[splitPath.indexOf('algorithms') + 1];
+            topic = convertSnakeToCapitalized(topic);
 
             const lang = extensionMap[ext];
 
@@ -54,6 +45,7 @@ const indexer = (filesList: string[]) => {
             } else {
                 obj[newName] = {
                     dir,
+                    topic,
                     files: [
                         {
                             base,
