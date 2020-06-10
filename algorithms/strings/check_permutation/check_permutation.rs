@@ -20,7 +20,6 @@ fn check_permutation(s1: &str,s2: &str) -> bool {
 }
 
 fn main() {
-
     // Probably a better way to do this
     let words: [String;6] = [
         String::from("apple"),
@@ -42,5 +41,4 @@ fn main() {
 
         i += 2;
     }
-
 }

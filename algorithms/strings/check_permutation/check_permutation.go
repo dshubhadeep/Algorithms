@@ -24,7 +24,6 @@ func checkPermutation(s1 string, s2 string) bool {
 }
 
 func main() {
-
 	words := [6]string{"apple", "papel", "mango", "orange", "aaaa", "aaa"}
 
 	for i := 0; i < len(words); i += 2 {
@@ -33,5 +32,4 @@ func main() {
 
 		fmt.Printf("%s %s : %t\n", first, second, checkPermutation(first, second))
 	}
-
 }

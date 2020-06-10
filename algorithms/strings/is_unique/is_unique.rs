@@ -18,7 +18,6 @@ fn is_unique(s: &str) -> bool {
 
 
 fn main() {
-
     let words: [String;5] = [
         String::from("abcde"),
         String::from("hello"),
@@ -30,5 +29,4 @@ fn main() {
     for word in words.iter() {
         println!("{} : {}", word,is_unique(&word));
     }
-
 }

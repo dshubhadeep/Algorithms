@@ -23,4 +23,3 @@ const words = ["abcde", "hello", "apple", "kite", "padle"];
 
 for (const word of words)
     console.log(`${word} : ${isUnique(word)}`);
-
