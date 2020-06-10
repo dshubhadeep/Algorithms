@@ -91,8 +91,6 @@ const ensureIndexes = (algorithm: string) => {
             );
 
             return newEntry;
-        } else {
-            throw new Error('Algorithm not present');
         }
     }
 
