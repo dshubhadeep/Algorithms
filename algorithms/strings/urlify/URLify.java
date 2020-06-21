@@ -1,4 +1,4 @@
-public class URLify {
+public class Urlify {
 
     private static void urlify(char[] arr, int trueLength) {
         int index = arr.length;
